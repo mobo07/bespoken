@@ -1,5 +1,11 @@
+import Home from "./pages/Home";
+
 function App() {
-  return <div className="text-3xl text-teal-500 font-bold">Bespoken.</div>;
+  return (
+    <div className="">
+      <Home />
+    </div>
+  );
 }
 
 export default App;
