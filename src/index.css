@@ -22,4 +22,23 @@
     .nav-link:hover::before {
         width: 100%;
     }
+
+    input[type="range"] {
+        -webkit-appearance: none;
+        height: 3px;
+        width: 100%;
+        background-color: #a3a2a2;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: #550417
+    }
 }

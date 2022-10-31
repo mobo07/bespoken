@@ -7,7 +7,6 @@ import tickIcon from "../assets/icons/tick-icon.png";
 import bagIcon from "../assets/icons/bag-icon.png";
 import ProductCategories from "../components/ProductCategories";
 import Footer from "../components/Footer";
-import { featuredProducts } from "../data/featuredProducts";
 import FeaturedProducts from "../components/FeaturedProducts";
 
 const Home = () => {
