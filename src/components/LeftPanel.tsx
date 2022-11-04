@@ -5,8 +5,13 @@ import { ImgOptions } from "../data/types";
 import useDragger from "../hooks/useDragger";
 import CustomImg from "./CustomImg";
 import RangeSlider from "./RangeSlider";
+import { tshirts } from "../data/featuredProducts";
 
-const LeftPanel = () => {
+interface Props {
+  clothColor: string;
+}
+
+const LeftPanel = ({ clothColor }: Props) => {
   const [img, setImg] = useState<string | null>();
   const [imgOpts, setImgOpts] = useState<ImgOptions>({
     size: "1",
@@ -51,14 +56,28 @@ const LeftPanel = () => {
         </label>
       </div>
       <div className="flex-[4] h-full p-3 flex flex-col items-center">
-        <div className="mx-auto w-[90%] h-[90%]">
-          <img
-            className="w-full h-full object-cover"
-            src="assets/images/plain-black-shirt.png"
-            alt=""
-          />
+        {/* T-shirts Wrapper */}
+        <div className="relative h-full w-full">
+          {tshirts.map((shirt, idx) => (
+            <div
+              key={idx}
+              className="absolute mx-auto w-[90%] h-[90%] z-0 opacity-0 transition duration-300"
+              style={{
+                zIndex: clothColor === shirt.name ? "1" : undefined,
+                opacity: clothColor === shirt.name ? "1" : undefined,
+              }}
+            >
+              <img
+                className="w-full h-full object-contain"
+                src={shirt.path}
+                alt=""
+              />
+            </div>
+          ))}
         </div>
-        <RangeSlider imgOpts={imgOpts} handleImgOpts={handleImgOpts} />
+        {img ? (
+          <RangeSlider imgOpts={imgOpts} handleImgOpts={handleImgOpts} />
+        ) : null}
       </div>
     </div>
   );

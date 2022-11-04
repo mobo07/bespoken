@@ -8,6 +8,7 @@ import bagIcon from "../assets/icons/bag-icon.png";
 import ProductCategories from "../components/ProductCategories";
 import Footer from "../components/Footer";
 import FeaturedProducts from "../components/FeaturedProducts";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -24,12 +25,15 @@ const Home = () => {
           <p className="text-[#1E0108] text-lg my-6">
             Tasteful on-demand garment <br /> customisation.
           </p>
-          <button className="bg-white my-4 text-sm flex items-center px-2 py-1 shadow-sm rounded-md font-medium hover:scale-105 transition">
+          <NavLink
+            to="/designlab"
+            className="bg-white w-max my-4 text-sm flex items-center px-2 py-1 shadow-sm rounded-md font-medium hover:scale-105 transition"
+          >
             Start Designing
             <span className="ml-2">
               <BsArrowRight />
             </span>
-          </button>
+          </NavLink>
         </div>
 
         {/* Hero Img */}

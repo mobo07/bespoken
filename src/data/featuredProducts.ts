@@ -81,3 +81,62 @@ export const featuredProducts: Products = [
         price: 5000,
     },
 ];
+
+// T-SHIRT CATEGORY COLORS
+interface TshirtCategory {
+    name: string;
+    colorCode: string;
+    path: string;
+}
+
+export const tshirts: TshirtCategory[] = [
+    {
+        name: "black",
+        colorCode: "#000",
+        path: "assets/images/plain-black-shirt.png",
+    },
+    {
+        name: "blue",
+        colorCode: "#08aac7",
+        path: "assets/images/plain tees/shirt1.png",
+    },
+    {
+        name: "green",
+        colorCode: "#44f069",
+        path: "assets/images/plain tees/shirt2.png",
+    },
+    {
+        name: "pink",
+        colorCode: "#e731d8",
+        path: "assets/images/plain tees/shirt3.png",
+    },
+    {
+        name: "peach",
+        colorCode: "#f5896e",
+        path: "assets/images/plain tees/shirt4.png",
+    },
+    {
+        name: "purple",
+        colorCode: "#d05bf3",
+        path: "assets/images/plain tees/shirt5.png",
+    },
+    {
+        name: "yellow",
+        colorCode: "#f5be0a",
+        path: "assets/images/plain tees/shirt9.png",
+    },
+    {
+        name: "white",
+        colorCode: "#ffffff",
+        path: "assets/images/plain tees/shirt11.png",
+    },
+];
+/**
+ blue -> #08aac7
+ green -> #44f069
+ pink -> #e731d8
+ peach -> #f5896e
+ purple -> #d05bf3
+ yellow -> #f5be0a
+ white -> #ffffff
+ */

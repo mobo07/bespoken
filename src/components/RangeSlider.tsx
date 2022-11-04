@@ -15,7 +15,7 @@ const RangeSlider = ({ imgOpts, handleImgOpts }: Props) => {
           onChange={(e) => handleImgOpts(e)}
           type="range"
           min="0.25"
-          max="1.7"
+          max="2"
           value={imgOpts.size}
           step=".01"
         />
