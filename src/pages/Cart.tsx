@@ -1,4 +1,5 @@
 import { AiFillDelete } from "react-icons/ai";
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const Cart = () => {
@@ -53,7 +54,7 @@ const Cart = () => {
               </div>
               <div className="mx-7 py-4 flex flex-col items-center justify-around">
                 <p className="font-semibold text-lg">N5,000</p>
-                <button className="flex items-center w-fit">
+                <button className="flex items-center w-fit rounded-md px-2 py-1 hover:bg-[rgba(0,0,0,.1)]">
                   <AiFillDelete /> <span className="ml-1 text-sm">Delete</span>
                 </button>
               </div>
@@ -99,7 +100,7 @@ const Cart = () => {
               </div>
               <div className="mx-7 py-4 flex flex-col items-center justify-around">
                 <p className="font-semibold text-lg">N5,000</p>
-                <button className="flex items-center w-fit">
+                <button className="flex items-center w-fit rounded-md px-2 py-1 hover:bg-[rgba(0,0,0,.1)]">
                   <AiFillDelete /> <span className="ml-1 text-sm">Delete</span>
                 </button>
               </div>
@@ -145,7 +146,7 @@ const Cart = () => {
               </div>
               <div className="mx-7 py-4 flex flex-col items-center justify-around">
                 <p className="font-semibold text-lg">N5,000</p>
-                <button className="flex items-center w-fit">
+                <button className="flex items-center w-fit rounded-md px-2 py-1 hover:bg-[rgba(0,0,0,.1)]">
                   <AiFillDelete /> <span className="ml-1 text-sm">Delete</span>
                 </button>
               </div>
@@ -187,6 +188,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

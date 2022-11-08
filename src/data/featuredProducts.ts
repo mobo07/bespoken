@@ -96,6 +96,11 @@ export const tshirts: TshirtCategory[] = [
         path: "assets/images/plain-black-shirt.png",
     },
     {
+        name: "white",
+        colorCode: "#ffffff",
+        path: "assets/images/plain tees/shirt11.png",
+    },
+    {
         name: "blue",
         colorCode: "#08aac7",
         path: "assets/images/plain tees/shirt1.png",
@@ -125,18 +130,4 @@ export const tshirts: TshirtCategory[] = [
         colorCode: "#f5be0a",
         path: "assets/images/plain tees/shirt9.png",
     },
-    {
-        name: "white",
-        colorCode: "#ffffff",
-        path: "assets/images/plain tees/shirt11.png",
-    },
 ];
-/**
- blue -> #08aac7
- green -> #44f069
- pink -> #e731d8
- peach -> #f5896e
- purple -> #d05bf3
- yellow -> #f5be0a
- white -> #ffffff
- */

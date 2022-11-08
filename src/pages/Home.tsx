@@ -88,9 +88,15 @@ const Home = () => {
       </div>
 
       {/* Product Categories */}
+      <h2 className="text-[#550417] mt-10 mx-7 font-bold text-xl">
+        Product Categories
+      </h2>
       <ProductCategories />
 
       {/* Featured Products */}
+      <h2 className="text-[#550417] mx-7 font-bold text-xl">
+        Featured Products
+      </h2>
       <FeaturedProducts />
 
       {/* Footer */}

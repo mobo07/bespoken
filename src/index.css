@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+    ::-webkit-scrollbar {
+        width: .5em;
+      }
+      
+      ::-webkit-scrollbar-track {
+        border-radius: 100vw;
+        margin-block: .5em;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #550417;
+        border-radius: 100vw;
+      }
+      
     .nav-logo {
         font-family: 'Yeseva One', cursive;
     }

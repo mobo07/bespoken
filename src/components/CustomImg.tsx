@@ -14,7 +14,7 @@ const CustomImg = ({ img, imgOpts }: Props) => {
       style={{ scale: `${imgOpts.size}` }}
     >
       <div className="absolute top-0 left-0 w-full h-full"></div>
-      <img className="w-full h-full object-cover" src={img} alt="" />
+      <img className="w-full h-full object-contain" src={img} alt="" />
     </div>
   );
 };

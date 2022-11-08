@@ -29,7 +29,7 @@ const LeftPanel = ({ clothColor }: Props) => {
   return (
     <div
       id="container"
-      className="flex flex-[1.7] bg-[#EEE7E7] h-full overflow-x-hidden touch-none"
+      className="flex flex-[1.7] bg-[#d3cece] h-full overflow-x-hidden touch-none"
     >
       <div className="flex-1 h-full p-3">
         <div className="relative w-[100px] h-[100px] mx-auto my-2 bg-white shadow-md flex items-center justify-center">

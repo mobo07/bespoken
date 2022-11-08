@@ -13,9 +13,12 @@ const Navbar = () => {
 
       {/* Nav links */}
       <ul className="flex items-center">
-        <li className="nav-link relative mx-4 text-sm cursor-pointer">
+        <NavLink
+          to="/products"
+          className="nav-link relative mx-4 text-sm cursor-pointer"
+        >
           Products
-        </li>
+        </NavLink>
         <NavLink
           to="/designlab"
           className="nav-link relative mx-4 text-sm cursor-pointer"
@@ -25,11 +28,19 @@ const Navbar = () => {
         <li className="nav-link relative mx-4 text-sm cursor-pointer">
           About Us
         </li>
-        <li className="mx-2 text-2xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center transition duration-300 hover:bg-[#0000001a]">
+        <li className="mx-2 text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center transition duration-300 hover:bg-[#0000001a]">
           <BsPerson />
         </li>
-        <NavLink to="/cart" className="mx-2 text-2xl cursor-pointer">
-          <Badge badgeContent={3} color="primary">
+        <NavLink to="/cart" className="mx-2 text-xl cursor-pointer">
+          <Badge
+            sx={{
+              "& .MuiBadge-badge": {
+                backgroundColor: "#B73554",
+                color: "white",
+              },
+            }}
+            badgeContent={3}
+          >
             <AiOutlineShoppingCart />
           </Badge>
         </NavLink>

@@ -26,8 +26,7 @@ const categories: Category[] = [
 
 const ProductCategories = () => {
   return (
-    <div className="mt-10 p-7">
-      <h2 className="text-[#550417] font-bold text-xl">Product Categories</h2>
+    <div className="px-7">
       <div className="w-full flex items-center justify-around mt-6">
         {categories.map((category) => (
           <ProductCategory
