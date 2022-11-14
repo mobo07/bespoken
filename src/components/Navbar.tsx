@@ -28,9 +28,10 @@ const Navbar = () => {
         <li className="nav-link relative mx-4 text-sm cursor-pointer">
           About Us
         </li>
-        <li className="mx-2 text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center transition duration-300 hover:bg-[#0000001a]">
+        <li className="nav-link relative mx-4 text-sm cursor-pointer">Login</li>
+        {/* <li className="mx-2 text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center transition duration-300 hover:bg-[#0000001a]">
           <BsPerson />
-        </li>
+        </li> */}
         <NavLink to="/cart" className="mx-2 text-xl cursor-pointer">
           <Badge
             sx={{

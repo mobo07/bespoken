@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { BsCardImage } from "react-icons/bs";
 import { ImgOptions } from "../data/types";
@@ -11,13 +11,64 @@ interface Props {
   clothColor: string;
 }
 
-const LeftPanel = ({ clothColor }: Props) => {
-  const [img, setImg] = useState<string | null>();
+const LeftPanel = (
+  { clothColor }: Props,
+  ref: React.ForwardedRef<HTMLDivElement>
+) => {
+  const [img, setImg] = useState<File>();
+  const [preview, setPreview] = useState<string>();
   const [imgOpts, setImgOpts] = useState<ImgOptions>({
     size: "1",
   });
+  const uploadContainerRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState<number>(0);
 
-  useDragger("target-img", "container", img);
+  useLayoutEffect(() => {
+    const getPosition = () => {
+      const imgWrapper = document.querySelector(
+        `[data-custom-img="active"]`
+      ) as HTMLDivElement;
+      const uploadContainer = uploadContainerRef.current;
+      if (!uploadContainer || !imgWrapper) return;
+
+      let left = uploadContainer?.clientWidth;
+      let computedStyles = window.getComputedStyle(
+        uploadContainer.firstElementChild as HTMLDivElement
+      );
+      let marginLeft = computedStyles.getPropertyValue("margin-left");
+      setPosition(left - +marginLeft.slice(0, marginLeft.length - 2));
+
+      imgWrapper.style.left = `-${position}px`;
+    };
+    getPosition();
+    window.addEventListener("resize", getPosition);
+    const cleanup = () => {
+      window.removeEventListener("resize", getPosition);
+      return cleanup;
+    };
+  }, [position, clothColor]);
+
+  useEffect(() => {
+    if (!img) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) setPreview(reader.result as string);
+    };
+    reader.readAsDataURL(img);
+  }, [img]);
+
+  useDragger(
+    "target-img",
+    "container",
+    `[data-custom-img="active"]`,
+    clothColor,
+    preview
+  );
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
+    if (file) setImg(file);
+  };
 
   const handleImgOpts = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImgOpts((prevState: ImgOptions) => ({
@@ -31,10 +82,10 @@ const LeftPanel = ({ clothColor }: Props) => {
       id="container"
       className="flex flex-[1.7] bg-[#d3cece] h-full overflow-x-hidden touch-none"
     >
-      <div className="flex-1 h-full p-3">
-        <div className="relative w-[100px] h-[100px] mx-auto my-2 bg-white shadow-md flex items-center justify-center">
+      <div ref={uploadContainerRef} className="flex-1 h-full p-3">
+        <div className="relative w-[100px] h-[100px] mx-auto bg-white shadow-md flex items-center justify-center">
           {img ? (
-            <CustomImg img={img} imgOpts={imgOpts} />
+            <CustomImg img={preview} imgOpts={imgOpts} />
           ) : (
             <BsCardImage className="text-5xl text-[#300710]" />
           )}
@@ -49,7 +100,8 @@ const LeftPanel = ({ clothColor }: Props) => {
           </span>
           <input
             type="file"
-            onChange={(e) => setImg(URL.createObjectURL(e.target.files![0]))}
+            accept="image/*"
+            onChange={(e) => handleFileInput(e)}
             className="hidden"
             id="upload"
           />
@@ -57,7 +109,7 @@ const LeftPanel = ({ clothColor }: Props) => {
       </div>
       <div className="flex-[4] h-full p-3 flex flex-col items-center">
         {/* T-shirts Wrapper */}
-        <div className="relative h-full w-full">
+        <div ref={ref} className="relative h-full w-full">
           {tshirts.map((shirt, idx) => (
             <div
               key={idx}
@@ -67,6 +119,16 @@ const LeftPanel = ({ clothColor }: Props) => {
                 opacity: clothColor === shirt.name ? "1" : undefined,
               }}
             >
+              <div
+                data-custom-img={
+                  clothColor === shirt.name ? "active" : undefined
+                }
+                className="absolute top-0"
+                style={{
+                  width: "100px",
+                  height: "100px",
+                }}
+              ></div>
               <img
                 className="w-full h-full object-contain"
                 src={shirt.path}
@@ -75,7 +137,7 @@ const LeftPanel = ({ clothColor }: Props) => {
             </div>
           ))}
         </div>
-        {img ? (
+        {preview ? (
           <RangeSlider imgOpts={imgOpts} handleImgOpts={handleImgOpts} />
         ) : null}
       </div>
@@ -83,4 +145,4 @@ const LeftPanel = ({ clothColor }: Props) => {
   );
 };
 
-export default LeftPanel;
+export default React.forwardRef(LeftPanel);

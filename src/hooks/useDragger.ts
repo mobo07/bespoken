@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const useDragger = (targetId: string, containerId: string, img: string | null | undefined) => {
+const useDragger = (targetId: string, containerId: string, customImg: string, color: string, img: string | null | undefined) => {
     const dragging = useRef<boolean>(false);
     const coords = useRef<{
       startX: number;
@@ -18,14 +18,23 @@ const useDragger = (targetId: string, containerId: string, img: string | null | 
         const target = document.getElementById(targetId);
         const container = document.getElementById(containerId);
         
+        
         if(!target) return;
         if(!container) throw new Error("container with the given id doesn't exist!");
-  
+        
+        let img = document.querySelector(customImg) as HTMLDivElement;
+        // if(!img) return;
+        img.appendChild(target);
+        
       const onPointerDown = (e: PointerEvent) => {
         dragging.current = true;
         target.style.cursor = "grabbing";
         coords.current.startX = e.clientX;
         coords.current.startY = e.clientY;
+
+        // let img = document.querySelector(customImg) as HTMLDivElement;
+        // if(!img) return;
+        // img.appendChild(target);
       };
   
       const onPointerUp = () => {
@@ -58,7 +67,7 @@ const useDragger = (targetId: string, containerId: string, img: string | null | 
       };
   
       return cleanup;
-    }, [targetId, containerId, img]);
+    }, [color, targetId, containerId, customImg, img]);
 }
 
 export default useDragger;
