@@ -55,4 +55,32 @@
         cursor: pointer;
         background-color: #550417
     }
+
+    .blink-2 {
+        -webkit-animation: blink-2 1s infinite both;
+                animation: blink-2 1s infinite both;
+    }
+
+    @-webkit-keyframes blink-2 {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.6;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes blink-2 {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.6;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
 }

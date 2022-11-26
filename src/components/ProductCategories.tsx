@@ -2,24 +2,28 @@ import ProductCategory from "./ProductCategory";
 
 interface Category {
   id: number;
-  type: "T-shirts" | "Sweat-shirts" | "Hoodies";
+  name: "T-shirts" | "Sweat-shirts" | "Hoodies";
+  type: "t-shirt" | "sweat-shirt" | "hoodie";
   img: string;
 }
 
 const categories: Category[] = [
   {
     id: 1,
-    type: "T-shirts",
+    name: "T-shirts",
+    type: "t-shirt",
     img: "assets/images/tshirt-category.png",
   },
   {
     id: 2,
-    type: "Sweat-shirts",
+    name: "Sweat-shirts",
+    type: "sweat-shirt",
     img: "assets/images/sweatshirt-category.png",
   },
   {
     id: 3,
-    type: "Hoodies",
+    name: "Hoodies",
+    type: "hoodie",
     img: "assets/images/hoodies-category.png",
   },
 ];
@@ -31,6 +35,7 @@ const ProductCategories = () => {
         {categories.map((category) => (
           <ProductCategory
             key={category.id}
+            name={category.name}
             type={category.type}
             img={category.img}
           />

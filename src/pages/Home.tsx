@@ -7,7 +7,7 @@ import tickIcon from "../assets/icons/tick-icon.png";
 import bagIcon from "../assets/icons/bag-icon.png";
 import ProductCategories from "../components/ProductCategories";
 import Footer from "../components/Footer";
-import FeaturedProducts from "../components/FeaturedProducts";
+import FeaturedProducts from "../components/Products";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
@@ -97,7 +97,7 @@ const Home = () => {
       <h2 className="text-[#550417] mx-7 font-bold text-xl">
         Featured Products
       </h2>
-      <FeaturedProducts />
+      <FeaturedProducts queryParams={["custom", "false"]} />
 
       {/* Footer */}
       <Footer />

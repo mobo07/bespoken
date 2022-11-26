@@ -1,28 +1,34 @@
 import { BsCreditCard } from "react-icons/bs";
 import { AiOutlineSave } from "react-icons/ai";
 import { AdultSizes, YouthSizes } from "../data/types";
-import { tshirts } from "../data/featuredProducts";
 
 interface Props {
+  colors:
+    | {
+        id: string;
+        img: string;
+        color: string[];
+      }[]
+    | undefined;
   setClothColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const youthSizes: YouthSizes[] = ["YXS", "YS", "YXL"];
 const adultSizes: AdultSizes[] = ["S", "M", "L", "XL", "2XL"];
 
-const RightPanel = ({ setClothColor }: Props) => {
+const RightPanel = ({ colors, setClothColor }: Props) => {
   return (
     <div className="px-6 flex-1 flex flex-col justify-between">
       {/* Colors */}
       <div className="">
         <h3 className="font-semibold text-lg text-[#300710]">Color:</h3>
         <div className="my-4 flex items-center">
-          {tshirts.map((tshirt, idx) => (
+          {colors?.map((color) => (
             <div
-              key={idx}
-              onClick={() => setClothColor(tshirt.name)}
+              key={color.id}
+              onClick={() => setClothColor(color.img)}
               className={`w-8 h-8 rounded-full border border-slate-200 mr-3 cursor-pointer`}
-              style={{ backgroundColor: tshirt.colorCode }}
+              style={{ backgroundColor: color.color[0] }}
             ></div>
           ))}
         </div>

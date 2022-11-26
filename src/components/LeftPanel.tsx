@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { BsCardImage } from "react-icons/bs";
-import { ImgOptions } from "../data/types";
+import { ImgOptions, Product } from "../data/types";
 import useDragger from "../hooks/useDragger";
 import CustomImg from "./CustomImg";
 import RangeSlider from "./RangeSlider";
-import { tshirts } from "../data/featuredProducts";
 
 interface Props {
   clothColor: string;
+  outfit: Product[];
 }
 
 const LeftPanel = (
-  { clothColor }: Props,
+  { clothColor, outfit }: Props,
   ref: React.ForwardedRef<HTMLDivElement>
 ) => {
   const [img, setImg] = useState<File>();
@@ -110,18 +110,18 @@ const LeftPanel = (
       <div className="flex-[4] h-full p-3 flex flex-col items-center">
         {/* T-shirts Wrapper */}
         <div ref={ref} className="relative h-full w-full">
-          {tshirts.map((shirt, idx) => (
+          {outfit.map((cloth) => (
             <div
-              key={idx}
+              key={cloth._id}
               className="absolute mx-auto w-[90%] h-[90%] z-0 opacity-0 transition duration-300"
               style={{
-                zIndex: clothColor === shirt.name ? "1" : undefined,
-                opacity: clothColor === shirt.name ? "1" : undefined,
+                zIndex: clothColor === cloth.img ? "1" : undefined,
+                opacity: clothColor === cloth.img ? "1" : undefined,
               }}
             >
               <div
                 data-custom-img={
-                  clothColor === shirt.name ? "active" : undefined
+                  clothColor === cloth.img ? "active" : undefined
                 }
                 className="absolute top-0"
                 style={{
@@ -131,7 +131,7 @@ const LeftPanel = (
               ></div>
               <img
                 className="w-full h-full object-contain"
-                src={shirt.path}
+                src={clothColor}
                 alt=""
               />
             </div>
