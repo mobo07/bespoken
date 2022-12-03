@@ -7,12 +7,12 @@ import CustomImg from "./CustomImg";
 import RangeSlider from "./RangeSlider";
 
 interface Props {
-  clothColor: string;
-  outfit: Product[];
+  activeOutfit: Product | undefined;
+  outfits: Product[] | undefined;
 }
 
 const LeftPanel = (
-  { clothColor, outfit }: Props,
+  { activeOutfit, outfits }: Props,
   ref: React.ForwardedRef<HTMLDivElement>
 ) => {
   const [img, setImg] = useState<File>();
@@ -25,19 +25,16 @@ const LeftPanel = (
 
   useLayoutEffect(() => {
     const getPosition = () => {
-      const imgWrapper = document.querySelector(
-        `[data-custom-img="active"]`
-      ) as HTMLDivElement;
+      const imgWrapper = document.getElementById("img-wrapper");
       const uploadContainer = uploadContainerRef.current;
       if (!uploadContainer || !imgWrapper) return;
 
-      let left = uploadContainer?.clientWidth;
+      let left = uploadContainer.clientWidth;
       let computedStyles = window.getComputedStyle(
-        uploadContainer.firstElementChild as HTMLDivElement
+        uploadContainer.firstElementChild!
       );
       let marginLeft = computedStyles.getPropertyValue("margin-left");
       setPosition(left - +marginLeft.slice(0, marginLeft.length - 2));
-
       imgWrapper.style.left = `-${position}px`;
     };
     getPosition();
@@ -46,7 +43,7 @@ const LeftPanel = (
       window.removeEventListener("resize", getPosition);
       return cleanup;
     };
-  }, [position, clothColor]);
+  }, [position, activeOutfit]);
 
   useEffect(() => {
     if (!img) return;
@@ -60,8 +57,8 @@ const LeftPanel = (
   useDragger(
     "target-img",
     "container",
-    `[data-custom-img="active"]`,
-    clothColor,
+    "img-wrapper",
+    activeOutfit?.color[0]!,
     preview
   );
 
@@ -110,28 +107,23 @@ const LeftPanel = (
       <div className="flex-[4] h-full p-3 flex flex-col items-center">
         {/* T-shirts Wrapper */}
         <div ref={ref} className="relative h-full w-full">
-          {outfit.map((cloth) => (
+          {/* Custom Img Wrapper */}
+          <div
+            id="img-wrapper"
+            className="absolute top-0 left-0 w-[100px] h-[100px]"
+          ></div>
+          {outfits?.map((cloth) => (
             <div
               key={cloth._id}
               className="absolute mx-auto w-[90%] h-[90%] z-0 opacity-0 transition duration-300"
               style={{
-                zIndex: clothColor === cloth.img ? "1" : undefined,
-                opacity: clothColor === cloth.img ? "1" : undefined,
+                zIndex: activeOutfit?._id === cloth._id ? "1" : undefined,
+                opacity: activeOutfit?._id === cloth._id ? "1" : undefined,
               }}
             >
-              <div
-                data-custom-img={
-                  clothColor === cloth.img ? "active" : undefined
-                }
-                className="absolute top-0"
-                style={{
-                  width: "100px",
-                  height: "100px",
-                }}
-              ></div>
               <img
                 className="w-full h-full object-contain"
-                src={clothColor}
+                src={activeOutfit?.img}
                 alt=""
               />
             </div>

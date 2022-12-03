@@ -26,6 +26,15 @@ export interface Product {
     inStock: boolean;
 };
 
+export interface CartProduct extends Product {
+  selectedColor: string;
+  selectedSize: string;
+  customImg?: string;
+  customOutfitImg?: string;
+  quantity: number;
+  totalPrice: number;
+}
+
 export interface CustomOutfitState {
     outfit: Product[] | undefined,
     loading: boolean,
@@ -43,3 +52,15 @@ export interface FiltersState {
   color?: string,
   sort?: string,
 };
+
+export interface CartState {
+  products: CartProduct[],
+  amount: number,
+  cartQuantity: number,
+}
+
+export interface UserChoiceState {
+  color: string;
+  size: string;
+  quantity: number;
+}

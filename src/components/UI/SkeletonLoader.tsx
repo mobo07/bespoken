@@ -1,5 +1,5 @@
 interface Props {
-  type: string;
+  type: "products" | "single";
 }
 
 const SkeletonLoader = ({ type }: Props) => {
@@ -20,7 +20,7 @@ const SkeletonLoader = ({ type }: Props) => {
 
   const SingleProductPageLoader = () => {
     return (
-      <div className="flex p-4">
+      <div className="mt-[4.3rem] flex p-4">
         <div className="blink-2 flex-1 bg-[#e7e2e2] h-[90vh]"></div>
         <div className="flex-1 px-12">
           <div className="blink-2 bg-[#e7e2e2] w-52 h-11"></div>

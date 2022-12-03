@@ -4,41 +4,31 @@ import RightPanel from "../components/RightPanel";
 import Footer from "../components/Footer";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { toPng } from "html-to-image";
-import { CustomOutfitState, Product } from "../data/types";
-import { fetchProducts } from "../axios";
+import { Product } from "../data/types";
+import { fetchCustomProducts } from "../productsApi";
+import { useQuery } from "@tanstack/react-query";
 
 const DesignLab = () => {
-  const [outfit, setOutfit] = useState<CustomOutfitState>({
-    outfit: undefined,
-    loading: false,
-    error: false,
+  const {
+    data: outfits,
+    isLoading,
+    isError,
+  } = useQuery<Product[]>({
+    queryKey: ["products", "custom", "true"],
+    queryFn: () => fetchCustomProducts("custom", "true"),
   });
-  const [clothColor, setClothColor] = useState<string>("");
+  const [activeOutfit, setActiveOutfit] = useState<Product>();
+  const [outfitCategory, setOutfitCategory] = useState<
+    "t-shirt" | "hoodie" | "sweat-shirt"
+  >("t-shirt");
   const ref = useRef<HTMLDivElement>(null);
 
-  // FETCH ALL CUSTOMIZABLE OUTFITS
   useEffect(() => {
-    const fetchOutfits = async () => {
-      try {
-        setOutfit((prev: CustomOutfitState) => ({ ...prev, loading: true }));
-        const res = await fetchProducts.get<Product[]>(`products?custom=true`);
-        setOutfit((prev: CustomOutfitState) => ({
-          ...prev,
-          loading: false,
-          outfit: res.data,
-        }));
-        setClothColor(res.data[0].img);
-      } catch (err) {
-        setOutfit((prev: CustomOutfitState) => ({
-          ...prev,
-          loading: false,
-          error: true,
-        }));
-        console.log(err);
-      }
-    };
-    fetchOutfits();
-  }, []);
+    if (outfits)
+      setActiveOutfit(
+        outfits.filter((outfit) => outfit.type === outfitCategory)[0]
+      );
+  }, [outfits, outfitCategory]);
 
   const onButtonClick = useCallback(() => {
     const getImgUrl = async () => {
@@ -60,33 +50,53 @@ const DesignLab = () => {
     getImgUrl();
   }, [ref]);
 
+  if (isLoading) {
+    return (
+      <div className="">
+        <Navbar />
+        <div className="flex items-center justify-center px-3 h-[calc(100vh_-_70px)]">
+          <p>loading...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="">
+        <Navbar />
+        <div className="flex items-center justify-center px-3 h-[calc(100vh_-_70px)]">
+          <p>Something went wrong.</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="">
       <Navbar />
 
-      {outfit.outfit ? (
-        <div className="flex px-3 h-[calc(100vh_-_70px)]">
-          <LeftPanel ref={ref} outfit={outfit.outfit} clothColor={clothColor} />
-          <RightPanel
-            colors={outfit.outfit.map((el) => ({
-              id: el._id,
-              img: el.img,
-              color: el.color,
-            }))}
-            setClothColor={setClothColor}
-          />
-        </div>
-      ) : (
-        <div className="flex items-center justify-center px-3 h-[calc(100vh_-_70px)]">
-          {outfit.error ? <p>Cannot fetch items</p> : <p>loading...</p>}
-        </div>
-      )}
-      <button
+      <div className="flex mt-[4.3rem] px-3 h-[calc(100vh_-_70px)]">
+        <LeftPanel
+          ref={ref}
+          outfits={outfits.filter((outfit) => outfit.type === outfitCategory)}
+          activeOutfit={activeOutfit}
+        />
+        <RightPanel
+          outfits={outfits.filter((outfit) => outfit.type === outfitCategory)}
+          activeOutfit={activeOutfit}
+          setActiveOutfit={setActiveOutfit}
+          setOutfitCategory={setOutfitCategory}
+        />
+      </div>
+      {/* <button
         onClick={onButtonClick}
         className="p-2 text-white bg-[rgba(0,0,0,0.1)]"
       >
         click me
-      </button>
+      </button> */}
       <Footer />
     </div>
   );

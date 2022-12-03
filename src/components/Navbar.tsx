@@ -2,10 +2,12 @@ import { BsPerson } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import Badge from "@mui/material/Badge";
+import { useAppSelector } from "../redux/hooks";
 
 const Navbar = () => {
+  const cartQuantity = useAppSelector((state) => state.cart.cartQuantity);
   return (
-    <nav className="w-full h-[70px] px-4 py-3 bg-white flex items-center justify-between">
+    <nav className="fixed top-0 z-50 w-full h-[4.3rem] px-4 py-3 bg-white flex items-center justify-between">
       {/* Nav logo */}
       <NavLink to="/" className="nav-logo font-normal text-3xl text-[#B73554]">
         Bespoken.
@@ -40,7 +42,7 @@ const Navbar = () => {
                 color: "white",
               },
             }}
-            badgeContent={3}
+            badgeContent={cartQuantity}
           >
             <AiOutlineShoppingCart />
           </Badge>

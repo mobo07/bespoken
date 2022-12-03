@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const useDragger = (targetId: string, containerId: string, customImg: string, color: string, img: string | null | undefined) => {
+const useDragger = (targetId: string, containerId: string, customImgId: string, color: string, img: string | null | undefined) => {
     const dragging = useRef<boolean>(false);
     const coords = useRef<{
       startX: number;
@@ -22,8 +22,8 @@ const useDragger = (targetId: string, containerId: string, customImg: string, co
         if(!target) return;
         if(!container) throw new Error("container with the given id doesn't exist!");
         
-        let img = document.querySelector(customImg) as HTMLDivElement;
-        // if(!img) return;
+        let img = document.getElementById(customImgId);
+        if(!img) return;
         img.appendChild(target);
         
       const onPointerDown = (e: PointerEvent) => {
@@ -31,10 +31,6 @@ const useDragger = (targetId: string, containerId: string, customImg: string, co
         target.style.cursor = "grabbing";
         coords.current.startX = e.clientX;
         coords.current.startY = e.clientY;
-
-        // let img = document.querySelector(customImg) as HTMLDivElement;
-        // if(!img) return;
-        // img.appendChild(target);
       };
   
       const onPointerUp = () => {
@@ -67,7 +63,7 @@ const useDragger = (targetId: string, containerId: string, customImg: string, co
       };
   
       return cleanup;
-    }, [color, targetId, containerId, customImg, img]);
+    }, [color, targetId, containerId, customImgId, img]);
 }
 
 export default useDragger;

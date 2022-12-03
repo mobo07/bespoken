@@ -9,14 +9,28 @@ import ProductCategories from "../components/ProductCategories";
 import Footer from "../components/Footer";
 import FeaturedProducts from "../components/Products";
 import { NavLink } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Product } from "../data/types";
+import { fetchCustomProducts } from "../productsApi";
+import SkeletonLoader from "../components/UI/SkeletonLoader";
 
 const Home = () => {
+  const {
+    data: products,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<Product[], Error>({
+    queryKey: ["products", "custom", "false"],
+    queryFn: () => fetchCustomProducts("custom", "false"),
+  });
+
   return (
     <div className="w-full">
       <Navbar />
 
       {/* Hero Section */}
-      <div className="w-[98%] mx-auto py-7 px-5 flex items-center bg-[#FDEEEE]">
+      <div className="w-[98%] mx-auto mt-[4.3rem] py-7 px-5 flex items-center bg-[#FDEEEE]">
         {/* Hero Text */}
         <div className="flex-1">
           <h1 className="text-[#550417] font-bold text-6xl my-6">
@@ -97,8 +111,13 @@ const Home = () => {
       <h2 className="text-[#550417] mx-7 font-bold text-xl">
         Featured Products
       </h2>
-      <FeaturedProducts queryParams={["custom", "false"]} />
-
+      {isLoading ? (
+        <SkeletonLoader type="products" />
+      ) : isError || error ? (
+        <p>something went wrong</p>
+      ) : (
+        <FeaturedProducts products={products?.slice(0, 12)} />
+      )}
       {/* Footer */}
       <Footer />
     </div>

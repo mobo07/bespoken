@@ -3,10 +3,25 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { FiltersState } from "../data/types";
+import { FiltersState, Product } from "../data/types";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCustomProducts } from "../productsApi";
+import SkeletonLoader from "../components/UI/SkeletonLoader";
 
 const ProductsPage = () => {
   const search = useLocation().search.slice(1).split("=");
+
+  const filteredProducts = useQuery<Product[]>({
+    queryKey: ["products", search[0], search[1]],
+    queryFn: () => fetchCustomProducts(search[0], search[1]),
+    enabled: search.length === 2 ? true : false,
+  });
+
+  const products = useQuery<Product[]>({
+    queryKey: ["products", "custom", "false"],
+    queryFn: () => fetchCustomProducts("custom", "false"),
+    enabled: search.length < 2 ? true : false,
+  });
 
   const [filters, setFilters] = useState<FiltersState>({});
 
@@ -58,12 +73,15 @@ const ProductsPage = () => {
           </div>
         </div>
 
-        <Products
-          queryParams={
-            search.length === 2 ? (search as [string, string]) : undefined
-          }
-          filters={filters}
-        />
+        {(search.length < 2 && products.isLoading) ||
+        (search.length === 2 && filteredProducts.isLoading) ? (
+          <SkeletonLoader type="products" />
+        ) : (
+          <Products
+            products={search.length < 2 ? products.data : filteredProducts.data}
+            filters={filters}
+          />
+        )}
       </div>
       <Footer />
     </div>
