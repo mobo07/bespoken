@@ -27,6 +27,7 @@ export interface Product {
 };
 
 export interface CartProduct extends Product {
+  cartId: string;
   selectedColor: string;
   selectedSize: string;
   customImg?: string;

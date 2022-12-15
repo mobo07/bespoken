@@ -8,6 +8,7 @@ import SkeletonLoader from "../components/UI/SkeletonLoader";
 import { useAppDispatch } from "../redux/hooks";
 import { addProduct } from "../redux/cartSlice";
 import { useQuery } from "@tanstack/react-query";
+import { v4 as uuidv4 } from "uuid";
 
 const SingleProduct = () => {
   const productId = useLocation().pathname.split("/")[2];
@@ -146,6 +147,7 @@ const SingleProduct = () => {
               dispatch(
                 addProduct({
                   ...(product as Product),
+                  cartId: uuidv4(),
                   selectedColor: userChoice.color,
                   selectedSize: userChoice.size,
                   totalPrice: +(product as Product).price * userChoice.quantity,

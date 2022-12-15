@@ -4,6 +4,7 @@ import { Product } from "../data/types";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { addProduct } from "../redux/cartSlice";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   product: Product;
@@ -24,6 +25,7 @@ const SingleProduct = ({ product }: Props) => {
             dispatch(
               addProduct({
                 ...product,
+                cartId: uuidv4(),
                 quantity: 1,
                 selectedColor: product.color[0],
                 selectedSize: product.size[0],

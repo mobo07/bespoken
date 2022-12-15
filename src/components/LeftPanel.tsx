@@ -9,13 +9,14 @@ import RangeSlider from "./RangeSlider";
 interface Props {
   activeOutfit: Product | undefined;
   outfits: Product[] | undefined;
+  img: File | string | undefined;
+  setImg: React.Dispatch<React.SetStateAction<File | string | undefined>>;
 }
 
 const LeftPanel = (
-  { activeOutfit, outfits }: Props,
+  { activeOutfit, outfits, img, setImg }: Props,
   ref: React.ForwardedRef<HTMLDivElement>
 ) => {
-  const [img, setImg] = useState<File>();
   const [preview, setPreview] = useState<string>();
   const [imgOpts, setImgOpts] = useState<ImgOptions>({
     size: "1",
@@ -51,7 +52,7 @@ const LeftPanel = (
     reader.onload = () => {
       if (reader.readyState === 2) setPreview(reader.result as string);
     };
-    reader.readAsDataURL(img);
+    reader.readAsDataURL(img as File);
   }, [img]);
 
   useDragger(

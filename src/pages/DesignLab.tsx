@@ -17,10 +17,12 @@ const DesignLab = () => {
     queryKey: ["products", "custom", "true"],
     queryFn: () => fetchCustomProducts("custom", "true"),
   });
+
   const [activeOutfit, setActiveOutfit] = useState<Product>();
   const [outfitCategory, setOutfitCategory] = useState<
     "t-shirt" | "hoodie" | "sweat-shirt"
   >("t-shirt");
+  const [img, setImg] = useState<File | string>();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const DesignLab = () => {
       );
   }, [outfits, outfitCategory]);
 
-  const onButtonClick = useCallback(() => {
+  const convertDivToPng = useCallback(() => {
     const getImgUrl = async () => {
       try {
         if (ref.current === null) return;
@@ -41,13 +43,14 @@ const DesignLab = () => {
         // link.click();
         console.log("waiting for url...");
         const url = await toPng(ref.current);
-        console.log("img is ready!!");
+        console.log("url generated successfully");
+        return url;
       } catch (error) {
-        console.log(error);
+        console.log("Error from divToPng", error);
       }
     };
 
-    getImgUrl();
+    return getImgUrl();
   }, [ref]);
 
   if (isLoading) {
@@ -83,12 +86,16 @@ const DesignLab = () => {
           ref={ref}
           outfits={outfits.filter((outfit) => outfit.type === outfitCategory)}
           activeOutfit={activeOutfit}
+          img={img}
+          setImg={setImg}
         />
         <RightPanel
           outfits={outfits.filter((outfit) => outfit.type === outfitCategory)}
           activeOutfit={activeOutfit}
           setActiveOutfit={setActiveOutfit}
           setOutfitCategory={setOutfitCategory}
+          img={img}
+          convertDivToPng={convertDivToPng}
         />
       </div>
       {/* <button

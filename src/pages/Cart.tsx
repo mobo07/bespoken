@@ -22,12 +22,14 @@ const Cart = () => {
             <div className="flex-[2]">
               {/* Cart Items */}
               {products.map((item) => (
-                <div key={item._id} className="flex justify-between my-4">
+                <div key={item.cartId} className="flex justify-between my-4">
                   <div className="flex">
                     <div className="w-44 h-44 bg-[#d6d4d4] rounded-md">
                       <img
                         className="w-full h-full object-cover rounded-md"
-                        src={item.img}
+                        src={
+                          item.customOutfitImg ? item.customOutfitImg : item.img
+                        }
                         alt=""
                       />
                     </div>
@@ -43,7 +45,7 @@ const Cart = () => {
                           onChange={(e) =>
                             dispatch(
                               editProduct({
-                                id: item._id,
+                                id: item.cartId,
                                 prop: "selectedSize",
                                 val: e.target.value,
                               })
@@ -92,7 +94,10 @@ const Cart = () => {
                           <span
                             onClick={() =>
                               dispatch(
-                                changeQuantity({ op: "increase", id: item._id })
+                                changeQuantity({
+                                  op: "increase",
+                                  id: item.cartId,
+                                })
                               )
                             }
                             className="mx-2 cursor-pointer font-semibold text-xl select-none"
@@ -108,7 +113,7 @@ const Cart = () => {
                       N{item.totalPrice.toLocaleString()}
                     </p>
                     <button
-                      onClick={() => dispatch(removeProduct(item._id))}
+                      onClick={() => dispatch(removeProduct(item.cartId))}
                       className="flex items-center w-fit rounded-md px-2 py-1 hover:bg-[rgba(0,0,0,.1)]"
                     >
                       <AiFillDelete />{" "}

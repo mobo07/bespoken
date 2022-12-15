@@ -1,5 +1,5 @@
 interface Props {
-  type: "products" | "single";
+  type: "products" | "single" | "addCustomOutfitToCart";
 }
 
 const SkeletonLoader = ({ type }: Props) => {
@@ -36,11 +36,17 @@ const SkeletonLoader = ({ type }: Props) => {
     );
   };
 
+  const CustomOutfitSpinner = () => {
+    return <span className="loader"></span>;
+  };
+
   switch (type) {
     case "products":
       return <ProductsLoader />;
     case "single":
       return <SingleProductPageLoader />;
+    case "addCustomOutfitToCart":
+      return <CustomOutfitSpinner />;
 
     default:
       return <p className="text-center">loading...</p>;

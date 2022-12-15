@@ -19,7 +19,7 @@ const cartSlice = createSlice({
         },
         removeProduct: (state, action: PayloadAction<string>) => {
             for(let i=0; i < state.products.length; i++) {
-                if(state.products[i]._id === action.payload) {
+                if(state.products[i].cartId === action.payload) {
                     state.amount -= state.products[i].totalPrice;
                     state.cartQuantity -= 1;
                     state.products.splice(i, 1);
@@ -28,14 +28,14 @@ const cartSlice = createSlice({
         },
         editProduct: (state, action: PayloadAction<{id: string, prop: "selectedSize"|"selectedColor", val: string}>) => {
             for(let product of state.products) {
-                if(product._id === action.payload.id) {
+                if(product.cartId === action.payload.id) {
                         product[action.payload.prop] = action.payload.val;
                 }
             }
         },
         changeQuantity: (state, action: PayloadAction<{id: string, op: "increase"|"decrease"}>) => {
             for(let product of state.products) {
-                if(action.payload.id === product._id) {
+                if(action.payload.id === product.cartId) {
                     if(action.payload.op === "decrease") {
                         if(product.quantity === 1) return;
                         product.quantity -= 1;
