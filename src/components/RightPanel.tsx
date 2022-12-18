@@ -61,7 +61,7 @@ const RightPanel = ({
             selectedColor: activeOutfit.color[0],
             selectedSize: activeOutfit.size[sizeIdx],
             customImg: customImgUrl ? customImgUrl : (img as string),
-            customOutfitImg: data.data.url,
+            customOutfitImg: data.data.secure_url,
             quantity: 1,
             totalPrice: +activeOutfit.price,
           })
@@ -83,7 +83,8 @@ const RightPanel = ({
     },
     onSuccess: async (data) => {
       console.log("custom img upload -> 100%");
-      setCustomImgUrl(data.data.url);
+      console.log(data.data);
+      setCustomImgUrl(data.data.secure_url);
       const divToPng = (await convertDivToPng()) as string;
       postCustomOutfit(divToPng);
     },
