@@ -83,7 +83,7 @@ const RightPanel = ({
     },
     onSuccess: async (data) => {
       console.log("custom img upload -> 100%");
-      console.log(data.data);
+      // console.log(data.data);
       setCustomImgUrl(data.data.secure_url);
       const divToPng = (await convertDivToPng()) as string;
       postCustomOutfit(divToPng);
