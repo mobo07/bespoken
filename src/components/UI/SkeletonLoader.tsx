@@ -1,8 +1,9 @@
 interface Props {
-  type: "products" | "single" | "addCustomOutfitToCart";
+  type: "products" | "single" | "default";
+  color?: string;
 }
 
-const SkeletonLoader = ({ type }: Props) => {
+const SkeletonLoader = ({ type, color }: Props) => {
   const ProductsLoader = () => {
     return (
       <div className="mt-5 p-7 h-max">
@@ -37,7 +38,12 @@ const SkeletonLoader = ({ type }: Props) => {
   };
 
   const CustomOutfitSpinner = () => {
-    return <span className="loader"></span>;
+    return (
+      <span
+        className="loader"
+        style={{ borderTop: `3px solid ${color}` }}
+      ></span>
+    );
   };
 
   switch (type) {
@@ -45,7 +51,7 @@ const SkeletonLoader = ({ type }: Props) => {
       return <ProductsLoader />;
     case "single":
       return <SingleProductPageLoader />;
-    case "addCustomOutfitToCart":
+    case "default":
       return <CustomOutfitSpinner />;
 
     default:

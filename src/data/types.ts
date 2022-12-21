@@ -1,5 +1,5 @@
-export type YouthSizes = "YXS" | "YS" | "YXL";
-export type AdultSizes = "S" | "M" | "L" | "XL" | "2XL";
+// export type YouthSizes = "YXS" | "YS" | "YXL";
+// export type AdultSizes = "S" | "M" | "L" | "XL" | "2XL";
 
 export interface DragState {
     dragging: boolean;
@@ -65,3 +65,25 @@ export interface UserChoiceState {
   size: string;
   quantity: number;
 }
+
+export interface RegisterDetails {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  isAdmin?: boolean;
+}
+export interface LoginDetails {
+  email: string;
+  password: string;
+}
+
+export interface IUser {
+  firstname: string;
+  lastname: string;
+  email: string;
+}
+
+export type UserState = {
+  user: IUser | null
+};

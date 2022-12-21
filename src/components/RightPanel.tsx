@@ -216,7 +216,7 @@ const RightPanel = ({
           className="px-2 w-[7.43rem] h-8 mx-4 flex items-center justify-center rounded-md border border-[#300710] text-sm"
         >
           {customOutfitLoading || customImgLoading ? (
-            <SkeletonLoader type="addCustomOutfitToCart" />
+            <SkeletonLoader type="default" color="#300710" />
           ) : (
             <span className="flex items-center">
               Add to cart{" "}

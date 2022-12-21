@@ -6,6 +6,8 @@ import { useAppSelector } from "../redux/hooks";
 
 const Navbar = () => {
   const cartQuantity = useAppSelector((state) => state.cart.cartQuantity);
+  const { user } = useAppSelector((state) => state.user);
+
   return (
     <nav className="fixed top-0 z-50 w-full h-[4.3rem] px-4 py-3 bg-white flex items-center justify-between">
       {/* Nav logo */}
@@ -30,7 +32,18 @@ const Navbar = () => {
         <li className="nav-link relative mx-4 text-sm cursor-pointer">
           About Us
         </li>
-        <li className="nav-link relative mx-4 text-sm cursor-pointer">Login</li>
+        {user ? (
+          <li className="mx-2 text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center transition duration-300 hover:bg-[#0000001a]">
+            <BsPerson />
+          </li>
+        ) : (
+          <NavLink
+            to="/login"
+            className="nav-link relative mx-4 text-sm cursor-pointer"
+          >
+            Login
+          </NavLink>
+        )}
         {/* <li className="mx-2 text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center transition duration-300 hover:bg-[#0000001a]">
           <BsPerson />
         </li> */}
