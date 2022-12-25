@@ -15,7 +15,7 @@ const Register = () => {
       );
     },
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
       if (data.status === 201) navigate("/login");
     },
     onError: (error: AxiosError) => {

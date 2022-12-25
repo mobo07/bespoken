@@ -6,11 +6,6 @@ const BASE_URL = "https://encouraging-hare-garment.cyclic.app/api/";
     baseURL: BASE_URL
 });
 
-// export const fetchProducts = () => api.get("products?custom=false").then(res => res.data);
-
-// export const fetchCustomProducts = (key: string, value: string) => api.get(`products?${key}=${value}`).then(res => res.data);
-
-// export const getProduct = (id: string) => api.get(`products/${id}`).then(res => res.data);
 
 export const fetchProducts = async () => {
     try {
@@ -36,3 +31,4 @@ export const getProduct = async (id: string) => {
         console.log(err);
     }
 }
+

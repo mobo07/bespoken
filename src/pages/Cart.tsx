@@ -2,12 +2,72 @@ import { AiFillDelete } from "react-icons/ai";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { editProduct, removeProduct, changeQuantity } from "../redux/cartSlice";
+import {
+  editProduct,
+  removeProduct,
+  changeQuantity,
+  clearCart,
+} from "../redux/cartSlice";
+import { usePaystackPayment } from "react-paystack";
+import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { products, amount } = useAppSelector((state) => state.cart);
+  const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const reference = uuidv4();
+  const navigate = useNavigate();
 
+  //PAYSTACK CONFIG
+  const config = {
+    reference,
+    email: user ? user.email : "",
+    amount: amount * 100,
+    publicKey: "pk_test_b39495155f9209f06ff6fd67b195cfe6d86cdc2a",
+  };
+
+  const onSuccess = () => {
+    // Implementation for whatever you want to do with reference and after success call.
+    const validatePayment = async () => {
+      try {
+        const token = localStorage.getItem("access_token");
+        const res = await axios.post(
+          `https://encouraging-hare-garment.cyclic.app/api/orders/${reference}`,
+          {
+            userId: user?.id,
+            products,
+            address: "heaven",
+          },
+          {
+            headers: {
+              token: `Bearer ${token}`,
+            },
+          }
+        );
+        // console.log(res);
+        if (res.status === 201) {
+          dispatch(clearCart());
+          navigate("/");
+        }
+      } catch (error) {
+        console.log("PAYSTACK ERROR ->", error);
+      }
+    };
+    validatePayment();
+  };
+
+  const onClose = () => {
+    console.log("closed");
+  };
+
+  //FUNCTION TO CHECK IF USER IS LOGGED-IN
+  const handleUser = () => {
+    navigate("/login");
+  };
+
+  const initializePayment = usePaystackPayment(config);
   return (
     <div className="">
       <Navbar />
@@ -153,7 +213,14 @@ const Cart = () => {
                       </span>
                     </div>
                   </div>
-                  <button className="font-medium text-white text-center w-[80%] py-2 my-5 bg-[#550417]">
+                  <button
+                    className="font-medium text-white text-center w-[80%] py-2 my-5 bg-[#550417]"
+                    onClick={
+                      !user
+                        ? handleUser
+                        : () => initializePayment(onSuccess, onClose)
+                    }
+                  >
                     CHECKOUT NOW
                   </button>
                 </div>

@@ -27,14 +27,16 @@ const Login = () => {
     onSuccess: (data) => {
       // console.log(data);
       if (data.status === 200) {
+        storeToken(data.data.token);
         dispatch(
           addUser({
+            id: data.data._id,
             firstname: data.data.firstname,
             lastname: data.data.lastname,
             email: data.data.email,
           })
         );
-        navigate("/");
+        navigate(-1);
       }
     },
     onError: (error: AxiosError) => {
@@ -45,6 +47,10 @@ const Login = () => {
       }
     },
   });
+
+  const storeToken = (token: string) => {
+    localStorage.setItem("access_token", token);
+  };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInfo((prevState: LoginDetails) => ({
