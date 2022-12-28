@@ -117,4 +117,11 @@
           transform: rotate(360deg);
         }
       } 
+
+      .left-arrow {
+        background: linear-gradient(90deg, #fff 60%, transparent);
+      }
+      .right-arrow {
+        background: linear-gradient(-90deg, #fff 60%, transparent);
+      }
 }

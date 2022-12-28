@@ -24,7 +24,7 @@ const Products = ({ products, filters }: Props) => {
   }, [filters]);
 
   return (
-    <div className="mt-5 p-7">
+    <div className="mt-5 px-7">
       <div className="flex flex-wrap items-center justify-center">
         {filteredProducts
           ? filteredProducts.map((product) => (

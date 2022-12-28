@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { Product, UserChoiceState } from "../data/types";
-import { getProduct } from "../productsApi";
+import { getProduct } from "../api";
 import SkeletonLoader from "../components/UI/SkeletonLoader";
 import { useAppDispatch } from "../redux/hooks";
 import { addProduct } from "../redux/cartSlice";

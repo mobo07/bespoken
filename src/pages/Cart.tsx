@@ -143,7 +143,10 @@ const Cart = () => {
                           <span
                             onClick={() =>
                               dispatch(
-                                changeQuantity({ op: "decrease", id: item._id })
+                                changeQuantity({
+                                  op: "decrease",
+                                  id: item.cartId,
+                                })
                               )
                             }
                             className="mx-2 cursor-pointer font-semibold text-xl select-none"

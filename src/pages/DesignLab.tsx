@@ -5,10 +5,13 @@ import Footer from "../components/Footer";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { toPng } from "html-to-image";
 import { Product } from "../data/types";
-import { fetchCustomProducts } from "../productsApi";
+import { fetchCustomProducts } from "../api";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 
 const DesignLab = () => {
+  const location = useLocation();
+  // console.log(location);
   const {
     data: outfits,
     isLoading,
@@ -30,6 +33,7 @@ const DesignLab = () => {
       setActiveOutfit(
         outfits.filter((outfit) => outfit.type === outfitCategory)[0]
       );
+    if (location.state.design) setImg(location.state.design.img);
   }, [outfits, outfitCategory]);
 
   const convertDivToPng = useCallback(() => {
@@ -98,12 +102,6 @@ const DesignLab = () => {
           convertDivToPng={convertDivToPng}
         />
       </div>
-      {/* <button
-        onClick={onButtonClick}
-        className="p-2 text-white bg-[rgba(0,0,0,0.1)]"
-      >
-        click me
-      </button> */}
       <Footer />
     </div>
   );

@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { FiltersState, Product } from "../data/types";
 import { useQuery } from "@tanstack/react-query";
-import { fetchCustomProducts } from "../productsApi";
+import { fetchCustomProducts } from "../api";
 import SkeletonLoader from "../components/UI/SkeletonLoader";
 
 const ProductsPage = () => {

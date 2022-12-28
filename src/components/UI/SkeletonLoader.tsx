@@ -1,5 +1,5 @@
 interface Props {
-  type: "products" | "single" | "default";
+  type: "products" | "designs" | "single" | "default";
   color?: string;
 }
 
@@ -14,6 +14,20 @@ const SkeletonLoader = ({ type, color }: Props) => {
               className="blink-2 w-[17.5rem] h-[22rem] bg-[#e7e2e2] m-3"
             ></div>
           ))}
+        </div>
+      </div>
+    );
+  };
+
+  const DesignsLoader = () => {
+    return (
+      <div className="mt-5 px-9 w-full overflow-x-hidden">
+        <div className="w-full overflow-x-hidden">
+          <div className="flex gap-3 w-fit">
+            {new Array(12).fill("loading").map((el, idx) => (
+              <div key={idx} className="blink-2 bg-[#e7e2e2] w-36 h-36"></div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -49,6 +63,8 @@ const SkeletonLoader = ({ type, color }: Props) => {
   switch (type) {
     case "products":
       return <ProductsLoader />;
+    case "designs":
+      return <DesignsLoader />;
     case "single":
       return <SingleProductPageLoader />;
     case "default":

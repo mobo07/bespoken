@@ -10,9 +10,10 @@ import Footer from "../components/Footer";
 import FeaturedProducts from "../components/Products";
 import { NavLink } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Product } from "../data/types";
-import { fetchCustomProducts } from "../productsApi";
+import { Product, TDesign } from "../data/types";
+import { fetchCustomProducts, fetchDesigns } from "../api";
 import SkeletonLoader from "../components/UI/SkeletonLoader";
+import Designs from "../components/Designs";
 
 const Home = () => {
   const {
@@ -23,6 +24,11 @@ const Home = () => {
   } = useQuery<Product[], Error>({
     queryKey: ["products", "custom", "false"],
     queryFn: () => fetchCustomProducts("custom", "false"),
+  });
+
+  const designs = useQuery<TDesign[], Error>({
+    queryKey: ["designs"],
+    queryFn: () => fetchDesigns(),
   });
 
   return (
@@ -107,8 +113,20 @@ const Home = () => {
       </h2>
       <ProductCategories />
 
+      {/* Featured Designs */}
+      <h2 className="text-[#550417] mt-10 mx-7 font-bold text-xl">
+        Featured Designs
+      </h2>
+      {designs.isLoading ? (
+        <SkeletonLoader type="designs" />
+      ) : designs.isError ? (
+        <p>cannot fetch designs</p>
+      ) : (
+        <Designs designs={designs.data} />
+      )}
+
       {/* Featured Products */}
-      <h2 className="text-[#550417] mx-7 font-bold text-xl">
+      <h2 className="text-[#550417] mt-10 mx-7 font-bold text-xl">
         Featured Products
       </h2>
       {isLoading ? (

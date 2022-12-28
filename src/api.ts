@@ -31,4 +31,20 @@ export const getProduct = async (id: string) => {
         console.log(err);
     }
 }
+export const fetchDesigns = async () => {
+    try {
+        const {data} = await api.get("designs");
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+export const getDesign = async (id: string) => {
+    try {
+        const {data} = await api.get(`designs/${id}`);
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+}
 

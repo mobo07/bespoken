@@ -17,7 +17,8 @@ export const featuredProducts: Products = [
     {
         id: 2,
         category: "t-shirt",
-        img: "assets/images/ft-category-img2.jfif",
+        img: "https://res.cloudinary.com/douecuprk/image/upload/v1672164269/qoptqu9wek4cmkmtteyg.png",
+        // img: "assets/images/ft-category-img2.jfif",
         price: 5000,
     },
     {

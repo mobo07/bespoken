@@ -47,7 +47,7 @@ const LeftPanel = (
   }, [position, activeOutfit]);
 
   useEffect(() => {
-    if (!img) return;
+    if (!img || typeof img === "string") return;
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) setPreview(reader.result as string);
@@ -83,7 +83,10 @@ const LeftPanel = (
       <div ref={uploadContainerRef} className="flex-1 h-full p-3">
         <div className="relative w-[100px] h-[100px] mx-auto bg-white shadow-md flex items-center justify-center">
           {img ? (
-            <CustomImg img={preview} imgOpts={imgOpts} />
+            <CustomImg
+              img={typeof img === "string" ? img : preview}
+              imgOpts={imgOpts}
+            />
           ) : (
             <BsCardImage className="text-5xl text-[#300710]" />
           )}
@@ -130,7 +133,7 @@ const LeftPanel = (
             </div>
           ))}
         </div>
-        {preview ? (
+        {img ? (
           <RangeSlider imgOpts={imgOpts} handleImgOpts={handleImgOpts} />
         ) : null}
       </div>

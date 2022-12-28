@@ -88,3 +88,10 @@ export interface IUser {
 export type UserState = {
   user: IUser | null
 };
+
+export type TDesign = {
+  _id: string,
+  name: string,
+  img: string,
+  price: number
+};
