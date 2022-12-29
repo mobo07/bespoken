@@ -33,7 +33,7 @@ const DesignLab = () => {
       setActiveOutfit(
         outfits.filter((outfit) => outfit.type === outfitCategory)[0]
       );
-    if (location.state.design) setImg(location.state.design.img);
+    if (!img && location.state) setImg(location.state.img);
   }, [outfits, outfitCategory]);
 
   const convertDivToPng = useCallback(() => {

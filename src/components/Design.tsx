@@ -12,9 +12,7 @@ const Design = ({ design }: Props) => {
 
   const handleClick = () => {
     navigate("/designlab", {
-      state: {
-        design,
-      },
+      state: design,
     });
   };
 

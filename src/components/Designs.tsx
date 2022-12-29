@@ -27,6 +27,7 @@ const Designs = ({ designs }: Props) => {
     const onPointerMove = (e: PointerEvent) => {
       if (dragging.current === false) return;
       dragWrapper.scrollLeft -= e.movementX;
+      handleArrowDisplay();
     };
 
     dragWrapper.addEventListener("pointerdown", onPointerDown);
@@ -45,14 +46,28 @@ const Designs = ({ designs }: Props) => {
 
   const handleArrows = (direction: "left" | "right") => {
     if (!designWrapper.current) return;
-    designWrapper.current.scrollLeft += direction === "left" ? -300 : 300;
+    designWrapper.current.scrollLeft += direction === "left" ? -350 : 350;
+    setTimeout(() => handleArrowDisplay(), 50);
+  };
+
+  const handleArrowDisplay = () => {
+    const leftIcon = document.getElementById("left-icon");
+    const rightIcon = document.getElementById("right-icon");
+    if (!designWrapper.current || !leftIcon || !rightIcon) return;
+    let scrollVal = Math.round(designWrapper.current.scrollLeft);
+    let maxScrollableWidth =
+      designWrapper.current.scrollWidth - designWrapper.current.clientWidth;
+    leftIcon.parentElement!.style.display = scrollVal > 0 ? "flex" : "none";
+    rightIcon.parentElement!.style.display =
+      maxScrollableWidth > scrollVal ? "flex" : "none";
   };
 
   return (
     <div className="relative mt-5 px-9 w-full overflow-x-hidden">
       {/* Left Arrow */}
-      <div className="left-arrow absolute top-0 left-0 h-full w-24 flex items-center z-[2]">
+      <div className="left-arrow absolute top-0 left-0 h-full w-24 hidden items-center z-[2]">
         <div
+          id="left-icon"
           className="hover:bg-[#e9e8f5] w-12 h-12 ml-3 flex items-center justify-center rounded-full cursor-pointer transition duration-300"
           onClick={() => handleArrows("left")}
         >
@@ -74,6 +89,7 @@ const Designs = ({ designs }: Props) => {
       {/* Right Arrow */}
       <div className="right-arrow absolute top-0 right-0 h-full w-24 flex items-center justify-end z-[2]">
         <div
+          id="right-icon"
           className="hover:bg-[#e9e8f5] w-12 h-12 mr-3 flex items-center justify-center rounded-full cursor-pointer transition duration-300"
           onClick={() => handleArrows("right")}
         >
