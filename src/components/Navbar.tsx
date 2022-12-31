@@ -33,7 +33,7 @@ const Navbar = () => {
       </div>
 
       {/* Nav items (for mobile devices/smaller viewports) */}
-      <div className="md:hidden">
+      <div className="flex items-center md:hidden">
         {user ? (
           <span className="mx-2 text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center transition duration-300 hover:bg-[#0000001a]">
             <BsPerson />

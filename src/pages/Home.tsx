@@ -36,7 +36,7 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="w-[98%] mx-auto mt-[4.3rem] py-7 px-5 flex items-center bg-gradient-to-br from-[#fac8c8] to-[#fff2f2]">
+      <div className="w-[98%] mx-auto mt-[4.3rem] py-7 px-5 flex items-center bg-gradient-to-br from-[#ffdada] to-[#fff2f2]">
         {/* Hero Text */}
         <div className="flex-1">
           <h1 className="text-[#550417] font-bold my-6 text-4xl md:text-6xl">
@@ -83,7 +83,7 @@ const Home = () => {
             src={pencilIcon}
             alt="pen-icon"
           />
-          <p className="text-sm text-[#300710] font-semibold my-3 md:my-0">
+          <p className="text-sm text-[#300710] font-semibold text-center my-3 md:my-0">
             Find a design.
           </p>
         </div>
@@ -93,7 +93,7 @@ const Home = () => {
             src={tickIcon}
             alt="tick-icon"
           />
-          <p className="text-sm text-[#300710] font-semibold my-3 md:my-0">
+          <p className="text-sm text-[#300710] font-semibold text-center my-3 md:my-0">
             Select desired garment type and size.
           </p>
         </div>
@@ -103,7 +103,7 @@ const Home = () => {
             src={bagIcon}
             alt="bag-icon"
           />
-          <p className="text-sm text-[#300710] font-semibold my-3 md:my-0">
+          <p className="text-sm text-[#300710] font-semibold text-center my-3 md:my-0">
             Place your order.
           </p>
         </div>
