@@ -1,10 +1,10 @@
 const Footer = () => {
   return (
-    <div className="w-full bg-[#FDEEEE] p-9 flex justify-center">
+    <div className="w-full bg-[#FDEEEE] p-9 flex md:justify-center">
       {/* Footer Links */}
 
       {/* Wrapper */}
-      <div className="w-[50%] h-full flex justify-between">
+      <div className="w-full h-full flex justify-between md:w-[50%]">
         <ul>
           <p className="font-semibold mb-3">Shop</p>
           <li className="nav-link relative cursor-pointer mb-1 text-sm w-max">
@@ -32,7 +32,7 @@ const Footer = () => {
             Partners
           </li>
         </ul>
-        <ul className="mx-10">
+        <ul>
           <p className="font-semibold mb-3">Help</p>
           <li className="nav-link relative cursor-pointer mb-1 text-sm w-max">
             Deliveries

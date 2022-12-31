@@ -12,7 +12,7 @@ function App() {
   const { user } = useAppSelector((state) => state.user);
 
   return (
-    <div className="">
+    <div className="w-full">
       <BrowserRouter>
         <Routes>
           <Route path="/">

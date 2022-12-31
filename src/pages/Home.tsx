@@ -36,18 +36,18 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="w-[98%] mx-auto mt-[4.3rem] py-7 px-5 flex items-center bg-[#FDEEEE]">
+      <div className="w-[98%] mx-auto mt-[4.3rem] py-7 px-5 flex items-center bg-gradient-to-br from-[#fac8c8] to-[#fff2f2]">
         {/* Hero Text */}
         <div className="flex-1">
-          <h1 className="text-[#550417] font-bold text-6xl my-6">
+          <h1 className="text-[#550417] font-bold my-6 text-4xl md:text-6xl">
             Made with <br /> care, and made <br /> to order.
           </h1>
-          <p className="text-[#1E0108] text-lg my-6">
+          <p className="text-[#1E0108] text-sm my-6 md:text-lg">
             Tasteful on-demand garment <br /> customisation.
           </p>
           <NavLink
             to="/designlab"
-            className="bg-white w-max my-4 text-sm flex items-center px-2 py-1 shadow-sm rounded-md font-medium hover:scale-105 transition"
+            className="bg-white w-max my-4 text-xs flex items-center px-2 py-1 shadow-sm rounded-md font-medium hover:scale-105 transition md:text-sm"
           >
             Start Designing
             <span className="ml-2">
@@ -57,7 +57,7 @@ const Home = () => {
         </div>
 
         {/* Hero Img */}
-        <div className="flex-1 flex items-center">
+        <div className="flex-1 items-center hidden md:flex">
           <div className="flex-1">
             <img
               className=" h-full w-full object-cover"
@@ -76,32 +76,34 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      <div className="w-full flex items-center justify-evenly my-6">
-        <div className="flex items-center">
+      <div className="w-full flex flex-col items-center my-6 md:flex-row md:justify-evenly">
+        <div className="flex flex-col items-center p-2 my-3 w-[70%] rounded-md shadow-md md:flex-row md:shadow-none md:rounded-none md:p-0 md:w-fit md:my-0">
           <img
-            className="w-[30px] h-[30px] mr-3 object-cover"
+            className="w-[30px] h-[30px] my-3 object-cover md:mr-3 md:my-0"
             src={pencilIcon}
             alt="pen-icon"
           />
-          <p className="text-sm text-[#300710] font-semibold">Find a design.</p>
+          <p className="text-sm text-[#300710] font-semibold my-3 md:my-0">
+            Find a design.
+          </p>
         </div>
-        <div className="flex items-center">
+        <div className="flex flex-col items-center p-2 my-3 w-[70%] rounded-md shadow-md md:flex-row md:shadow-none md:rounded-none md:p-0 md:w-fit md:my-0">
           <img
-            className="w-[30px] h-[30px] mr-3 object-cover"
+            className="w-[30px] h-[30px] my-3 object-cover md:mr-3 md:my-0"
             src={tickIcon}
             alt="tick-icon"
           />
-          <p className="text-sm text-[#300710] font-semibold">
+          <p className="text-sm text-[#300710] font-semibold my-3 md:my-0">
             Select desired garment type and size.
           </p>
         </div>
-        <div className="flex items-center">
+        <div className="flex flex-col items-center p-2 my-3 w-[70%] rounded-md shadow-md md:flex-row md:shadow-none md:rounded-none md:p-0 md:w-fit md:my-0">
           <img
-            className="w-[30px] h-[30px] mr-3 object-cover"
+            className="w-[30px] h-[30px] my-3 object-cover md:mr-3 md:my-0"
             src={bagIcon}
             alt="bag-icon"
           />
-          <p className="text-sm text-[#300710] font-semibold">
+          <p className="text-sm text-[#300710] font-semibold my-3 md:my-0">
             Place your order.
           </p>
         </div>

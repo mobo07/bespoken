@@ -13,7 +13,7 @@ interface Props {
 const SingleProduct = ({ product }: Props) => {
   const dispatch = useAppDispatch();
   return (
-    <div className="group flex align-center justfiy-center relative w-[17.5rem] h-[22rem] bg-[#D9D9D9] m-3">
+    <div className="group flex align-center justfiy-center relative w-[17.5rem] h-[20rem] bg-[#D9D9D9] m-3 md:h-[22rem]">
       <img
         className="w-full h-full object-cover"
         src={product.img}

@@ -31,7 +31,7 @@ const categories: Category[] = [
 const ProductCategories = () => {
   return (
     <div className="px-7">
-      <div className="w-full flex items-center justify-around mt-6">
+      <div className="w-full h-screen flex flex-col mt-6 md:flex-row md:items-center md:justify-around md:h-fit">
         {categories.map((category) => (
           <ProductCategory
             key={category.id}
