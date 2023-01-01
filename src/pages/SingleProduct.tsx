@@ -75,19 +75,19 @@ const SingleProduct = () => {
   return (
     <div className="">
       <Navbar />
-      <div className="flex p-4 mt-[4.3rem]">
+      <div className="flex flex-col p-4 mt-[4.3rem] md:flex-row">
         <div className="flex-1 flex">
-          <div className="w-full h-[90vh]">
+          <div className="w-full h-[50vh] md:h-[90vh]">
             <img
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover md:object-contain"
               src={product.img}
               alt=""
             />
           </div>
         </div>
-        <div className="flex-1 px-12">
-          <h1 className="text-3xl font-light">{product.name}</h1>
-          <p className="my-6">{product.desc}</p>
+        <div className="flex-1 md:px-12">
+          <h1 className="text-3xl font-light my-2 md:my-0">{product.name}</h1>
+          <p className="my-3 md:my-6">{product.desc}</p>
           <span className="text-3xl font-light">N{product.price}</span>
           <div className="flex items-center my-6">
             <div className="flex items-center">

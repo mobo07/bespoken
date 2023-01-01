@@ -78,7 +78,7 @@ const Cart = () => {
         <hr className="border-none h-[2px] bg-[#D9D9D9] mb-7" />
 
         {products.length ? (
-          <div className="w-full flex">
+          <div className="w-full flex flex-col md:flex-row">
             <div className="flex-[2]">
               {/* Cart Items */}
               {products.map((item) => (

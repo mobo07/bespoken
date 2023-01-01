@@ -68,7 +68,7 @@ const Login = () => {
 
   return (
     <div className="w-full h-screen bg-[#f8e1e1] flex items-center justify-center">
-      <div className="bg-white p-4 w-[30%] max-w-[450px]">
+      <div className="bg-white p-4 w-[80%] md:w-[30%] md:max-w-[450px]">
         {err && <p className="text-red-600 my-2 text-center text-sm">{err}</p>}
         <h1 className="text-2xl">SIGN IN</h1>
         <form className="my-3 flex flex-col" onSubmit={handleSubmit}>

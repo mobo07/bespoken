@@ -58,7 +58,7 @@ const Register = () => {
 
   return (
     <div className="w-screen h-screen bg-[#f8e1e1] flex items-center justify-center">
-      <div className="bg-white p-4 w-[60%] max-w-[450px]">
+      <div className="bg-white p-4 w-[85%] md:w-[60%] md:max-w-[450px]">
         {err && <p className="text-red-600 my-2 text-center text-sm">{err}</p>}
         <h1 className="text-2xl">CREATE AN ACCOUNT</h1>
         <form className="my-3 flex flex-wrap" onSubmit={handleSubmit}>

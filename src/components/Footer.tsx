@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="w-full bg-[#FDEEEE] p-9 flex md:justify-center">
+    <div className="w-full bg-[#FDEEEE] p-5 flex md:p-9 md:justify-center">
       {/* Footer Links */}
 
       {/* Wrapper */}

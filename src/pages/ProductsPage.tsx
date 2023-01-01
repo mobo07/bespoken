@@ -36,25 +36,28 @@ const ProductsPage = () => {
   return (
     <div className="">
       <Navbar />
-      <div className="my-3 p-4">
+      <div className="mt-[3.4rem] mb-3 p-4">
         <h1 className="mb-4 text-2xl font-semibold text-[#550417]">Products</h1>
-        <div className="my-4 flex items-center justify-between">
-          <div className="flex items-center">
-            <p className="text-lg font-medium text-[#550417]">
+        <div className="my-4 flex w-full md:items-center justify-between">
+          <div className="flex flex-col md:items-center md:flex-row">
+            <p className="text-base font-medium text-[#550417] md:text-lg">
               Filter Products:
             </p>
             <select
               onChange={(e) => handleFilters(e, "color")}
-              className="border border-slate-200 outline-none p-2 rounded-sm text-sm mx-2 cursor-pointer"
+              className="border border-slate-200 outline-none p-2 rounded-sm text-sm my-2 cursor-pointer md:mx-2"
             >
               <option value="">Color</option>
               <option value="white">White</option>
               <option value="black">Black</option>
               <option value="blue">Blue</option>
+              <option value="white">Red</option>
+              <option value="black">Green</option>
+              <option value="blue">Yellow</option>
             </select>
             <select
               onChange={(e) => handleFilters(e, "size")}
-              className="border border-slate-200 outline-none p-2 rounded-sm text-sm mx-2 cursor-pointer"
+              className="border border-slate-200 outline-none p-2 rounded-sm text-sm my-2 cursor-pointer md:mx-2"
             >
               <option value="">Size</option>
               <option value="XL">XL</option>
@@ -63,9 +66,11 @@ const ProductsPage = () => {
               <option value="S">S</option>
             </select>
           </div>
-          <div className="flex items-center">
-            <p className="text-lg font-medium text-[#550417]">Sort Products:</p>
-            <select className="border border-slate-200 outline-none p-2 rounded-sm text-sm mx-2 cursor-pointer">
+          <div className="flex flex-col md:items-center md:flex-row">
+            <p className="text-base font-medium text-[#550417] md:text-lg">
+              Sort Products:
+            </p>
+            <select className="border border-slate-200 outline-none p-2 rounded-sm text-sm my-2 cursor-pointer md:mx-2">
               <option>Newest</option>
               <option>Price (asc)</option>
               <option>Price (desc)</option>

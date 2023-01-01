@@ -35,11 +35,11 @@ const SkeletonLoader = ({ type, color }: Props) => {
 
   const SingleProductPageLoader = () => {
     return (
-      <div className="mt-[4.3rem] flex p-4">
-        <div className="blink-2 flex-1 bg-[#e7e2e2] h-[90vh]"></div>
-        <div className="flex-1 px-12">
+      <div className="mt-[4.3rem] flex flex-col p-4 md:flex-row">
+        <div className="blink-2 bg-[#e7e2e2] h-[50vh] md:h-[90vh] md:flex-1"></div>
+        <div className="py-5 md:flex-1 md:py-0 md:px-12">
           <div className="blink-2 bg-[#e7e2e2] w-52 h-11"></div>
-          <div className="blink-2 bg-[#e7e2e2] my-6 w-[30rem] h-24"></div>
+          <div className="blink-2 bg-[#e7e2e2] my-6 w-full h-24 md:w-[30rem]"></div>
           <div className="blink-2 bg-[#e7e2e2] w-40 h-11"></div>
           <div className="flex items-center my-6">
             <div className="blink-2 bg-[#e7e2e2] w-36 h-10"></div>

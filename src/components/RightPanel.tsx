@@ -126,7 +126,9 @@ const RightPanel = ({
 
   return (
     <div className="px-6 flex-1 flex flex-col justify-between">
-      <h1 className="text-3xl font-light">{activeOutfit?.name}</h1>
+      <h1 className="text-2xl my-3 font-light md:my-0 md:text-3xl">
+        {activeOutfit?.name}
+      </h1>
       {/* Outfit Type */}
       <div className="">
         <h3 className="font-semibold text-lg text-[#300710]">Outfit Type:</h3>
@@ -166,12 +168,12 @@ const RightPanel = ({
       {/* Colors */}
       <div className="">
         <h3 className="font-semibold text-lg text-[#300710]">Color:</h3>
-        <div className="my-4 flex items-center">
+        <div className="my-4 flex items-center flex-wrap">
           {outfits?.map((item) => (
             <div
               key={item._id}
               onClick={() => setActiveOutfit(item)}
-              className={`w-8 h-8 rounded-full border border-slate-200 mr-3 cursor-pointer`}
+              className={`w-8 h-8 rounded-full border border-slate-200 m-1 cursor-pointer`}
               style={{ backgroundColor: item.color[0] }}
             ></div>
           ))}

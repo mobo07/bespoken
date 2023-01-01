@@ -8,7 +8,7 @@ interface Props {
 const RangeSlider = ({ imgOpts, handleImgOpts }: Props) => {
   return (
     // Wrapper Div
-    <div className="mt-3 h-6 w-[45%] flex">
+    <div className="mt-3 h-6 w-fit flex md:w-[45%]">
       {/* field */}
       <p className="text-center text-sm mr-3">Image Size</p>
       <div className="relative flex items-center justify-center h-full">
