@@ -85,7 +85,7 @@ const DesignLab = () => {
     <div className="">
       <Navbar />
 
-      <div className="flex flex-col mt-[4.3rem] px-3 h-screen md:h-[calc(100vh_-_70px)] md:flex-row">
+      <div className="flex flex-col mt-[4.3rem] px-3 h-[150vh] md:h-[calc(100vh_-_70px)] md:flex-row">
         <LeftPanel
           ref={ref}
           outfits={outfits.filter((outfit) => outfit.type === outfitCategory)}
