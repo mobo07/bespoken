@@ -32,6 +32,7 @@ const RightPanel = ({
   const [customImgUrl, setCustomImgUrl] = useState<string | undefined>(
     undefined
   );
+  const [convertingToPng, setConvertingToPng] = useState<boolean>(false);
 
   // POST CUSTOM OUTFIT IMG TO CLOUDINARY
   const {
@@ -115,8 +116,15 @@ const RightPanel = ({
         })
       );
     } else {
-      const divToPng = (await convertDivToPng()) as string;
-      postCustomOutfit(divToPng);
+      try {
+        setConvertingToPng(true);
+        const divToPng = (await convertDivToPng()) as string;
+        setConvertingToPng(false);
+        postCustomOutfit(divToPng);
+      } catch (err) {
+        setConvertingToPng(false);
+        console.log(err);
+      }
     }
   };
 
@@ -208,16 +216,20 @@ const RightPanel = ({
       <div className="w-full flex justify-end items-center my-5">
         <button
           onClick={handleClick}
-          disabled={customOutfitLoading || customImgLoading ? true : false}
+          disabled={
+            customOutfitLoading || customImgLoading || convertingToPng
+              ? true
+              : false
+          }
           style={{
             cursor:
-              customOutfitLoading || customImgLoading
+              customOutfitLoading || customImgLoading || convertingToPng
                 ? "not-allowed"
                 : "pointer",
           }}
           className="px-2 w-[7.43rem] h-8 mx-4 flex items-center justify-center rounded-md border border-[#300710] text-sm"
         >
-          {customOutfitLoading || customImgLoading ? (
+          {customOutfitLoading || customImgLoading || convertingToPng ? (
             <SkeletonLoader type="default" color="#300710" />
           ) : (
             <span className="flex items-center">

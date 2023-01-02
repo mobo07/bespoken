@@ -23,6 +23,7 @@ const useDragger = (targetId: string, containerId: string, customImgId: string, 
         if(!container) throw new Error("container with the given id doesn't exist!");
         
         let img = document.getElementById(customImgId);
+
         if(!img) return;
         img.appendChild(target);
         
@@ -32,20 +33,20 @@ const useDragger = (targetId: string, containerId: string, customImgId: string, 
         coords.current.startX = e.clientX;
         coords.current.startY = e.clientY;
       };
-  
+      
       const onPointerUp = () => {
         dragging.current = false;
         coords.current.lastX = target.offsetLeft;
         coords.current.lastY = target.offsetTop;
         target.style.cursor = "grab";
       };
-  
+      
       const onPointerMove = (e: PointerEvent) => {
         if (!dragging.current) return;
-  
+        
         const nextX = e.clientX - coords.current.startX + coords.current.lastX;
         const nextY = e.clientY - coords.current.startY + coords.current.lastY;
-  
+        
         target.style.left = `${nextX}px`;
         target.style.top = `${nextY}px`;
       };

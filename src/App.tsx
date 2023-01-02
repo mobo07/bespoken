@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ScrollToTop from "./components/UI/ScrollToTop";
 import Cart from "./pages/Cart";
 import DesignLab from "./pages/DesignLab";
 import Home from "./pages/Home";
@@ -14,25 +15,29 @@ function App() {
   return (
     <div className="w-full">
       <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route
-              path="register"
-              element={user ? <Navigate to="/" replace={true} /> : <Register />}
-            />
-            <Route
-              path="login"
-              element={user ? <Navigate to="/" replace={true} /> : <Login />}
-            />
-            <Route path="designlab" element={<DesignLab />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="products" element={<ProductsPage />} />
-            <Route path="/products/:id">
-              <Route index element={<SingleProduct />} />
+        <ScrollToTop>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route
+                path="register"
+                element={
+                  user ? <Navigate to="/" replace={true} /> : <Register />
+                }
+              />
+              <Route
+                path="login"
+                element={user ? <Navigate to="/" replace={true} /> : <Login />}
+              />
+              <Route path="designlab" element={<DesignLab />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="products" element={<ProductsPage />} />
+              <Route path="/products/:id">
+                <Route index element={<SingleProduct />} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
+          </Routes>
+        </ScrollToTop>
       </BrowserRouter>
     </div>
   );
