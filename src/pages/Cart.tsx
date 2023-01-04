@@ -1,17 +1,13 @@
-import { AiFillDelete } from "react-icons/ai";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import {
-  editProduct,
-  removeProduct,
-  changeQuantity,
-  clearCart,
-} from "../redux/cartSlice";
+import { clearCart } from "../redux/cartSlice";
 import { usePaystackPayment } from "react-paystack";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import MobileCartItem from "../components/UI/MobileCartItem";
+import CartItem from "../components/UI/CartItem";
 
 const Cart = () => {
   const { products, amount } = useAppSelector((state) => state.cart);
@@ -24,7 +20,7 @@ const Cart = () => {
   const config = {
     reference,
     email: user ? user.email : "",
-    amount: amount * 100,
+    amount: amount * 100 + 250,
     publicKey: "pk_test_b39495155f9209f06ff6fd67b195cfe6d86cdc2a",
   };
 
@@ -79,111 +75,17 @@ const Cart = () => {
 
         {products.length ? (
           <div className="w-full flex flex-col md:flex-row">
-            <div className="flex-[2]">
+            {/* Cart Items for mobile/smaller viewports */}
+            <div className="w-full md:hidden">
+              {products.map((item) => (
+                <MobileCartItem key={item.cartId} item={item} />
+              ))}
+            </div>
+            {/* Cart Items for larger screens/viewports */}
+            <div className="hidden md:flex-[2] md:block">
               {/* Cart Items */}
               {products.map((item) => (
-                <div key={item.cartId} className="flex justify-between my-4">
-                  <div className="flex">
-                    <div className="w-44 h-44 bg-[#d6d4d4] rounded-md">
-                      <img
-                        className="w-full h-full object-cover rounded-md"
-                        src={
-                          item.customOutfitImg ? item.customOutfitImg : item.img
-                        }
-                        alt=""
-                      />
-                    </div>
-                    <div className="mx-4 flex flex-col justify-evenly">
-                      <div className="">
-                        <p className="font-medium text-lg">{item.name}</p>
-                        <p className="text-sm">
-                          N{item.price.toLocaleString()}
-                        </p>
-                      </div>
-                      <div className="flex">
-                        <select
-                          onChange={(e) =>
-                            dispatch(
-                              editProduct({
-                                id: item.cartId,
-                                prop: "selectedSize",
-                                val: e.target.value,
-                              })
-                            )
-                          }
-                          value={item.selectedSize}
-                          className="border border-slate-200 outline-none px-2 py-1 rounded-md text-sm mx-2 cursor-pointer"
-                        >
-                          {item.size.map((el, idx) => (
-                            <option key={idx} value={el}>
-                              {el}
-                            </option>
-                          ))}
-                        </select>
-                        <select
-                          onChange={(e) =>
-                            dispatch(
-                              editProduct({
-                                id: item._id,
-                                prop: "selectedColor",
-                                val: e.target.value,
-                              })
-                            )
-                          }
-                          value={item.selectedColor}
-                          className="border border-slate-200 outline-none px-2 py-1 rounded-md text-sm mx-2 cursor-pointer"
-                        >
-                          {item.color.map((el, idx) => (
-                            <option key={idx} value={el}>
-                              {el}
-                            </option>
-                          ))}
-                        </select>
-                        <div className="border border-slate-200 mx-2 px-[2px] py-1 flex items-center justify-between rounded-md">
-                          <span
-                            onClick={() =>
-                              dispatch(
-                                changeQuantity({
-                                  op: "decrease",
-                                  id: item.cartId,
-                                })
-                              )
-                            }
-                            className="mx-2 cursor-pointer font-semibold text-xl select-none"
-                          >
-                            -
-                          </span>
-                          {item.quantity}
-                          <span
-                            onClick={() =>
-                              dispatch(
-                                changeQuantity({
-                                  op: "increase",
-                                  id: item.cartId,
-                                })
-                              )
-                            }
-                            className="mx-2 cursor-pointer font-semibold text-xl select-none"
-                          >
-                            +
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mx-7 py-4 flex flex-col items-center justify-around">
-                    <p className="font-semibold text-lg">
-                      N{item.totalPrice.toLocaleString()}
-                    </p>
-                    <button
-                      onClick={() => dispatch(removeProduct(item.cartId))}
-                      className="flex items-center w-fit rounded-md px-2 py-1 hover:bg-[rgba(0,0,0,.1)]"
-                    >
-                      <AiFillDelete />{" "}
-                      <span className="ml-1 text-sm">Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <CartItem key={item.cartId} item={item} />
               ))}
             </div>
 
@@ -212,7 +114,7 @@ const Cart = () => {
                     <div className="flex items-center justify-between my-6 font-semibold text-xl">
                       <p className="">Total</p>
                       <span className="">
-                        N{(amount + 2500).toLocaleString()}
+                        N{(amount + 250).toLocaleString()}
                       </span>
                     </div>
                   </div>
