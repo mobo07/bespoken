@@ -17,23 +17,23 @@ const Sidebar = ({ openSidebar, setOpenSidebar }: Props) => {
         <ul className="flex flex-col">
           <NavLink
             to="/"
-            className="nav-link relative my-3 w-fit text-base font-semibold cursor-pointer"
+            className="nav-link relative my-3 w-fit text-sm font-medium cursor-pointer"
           >
             Home
           </NavLink>
           <NavLink
             to="/products"
-            className="nav-link relative my-3 w-fit text-base font-semibold cursor-pointer"
+            className="nav-link relative my-3 w-fit text-sm font-medium cursor-pointer"
           >
             Products
           </NavLink>
           <NavLink
             to="/designlab"
-            className="nav-link relative my-3 w-fit text-base font-semibold cursor-pointer"
+            className="nav-link relative my-3 w-fit text-sm font-medium cursor-pointer"
           >
             Design Lab
           </NavLink>
-          <li className="nav-link relative my-3 w-fit text-base font-semibold cursor-pointer">
+          <li className="nav-link relative my-3 w-fit text-sm font-medium cursor-pointer">
             About Us
           </li>
         </ul>
