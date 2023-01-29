@@ -95,6 +95,7 @@ const LeftPanel = (
         </div>
         <label
           htmlFor="upload"
+          id="design-wrapper"
           className="px-2 w-20 h-8 mx-auto my-4 flex items-center justify-center bg-white rounded-md text-sm shadow-md cursor-pointer"
         >
           Upload{" "}
@@ -112,7 +113,7 @@ const LeftPanel = (
       </div>
       <div className="flex-[4] h-full p-3 flex flex-col items-center">
         {/* T-shirts Wrapper */}
-        <div ref={ref} className="relative h-full w-full">
+        <div ref={ref} id="outfit-wrapper" className="relative h-full w-full">
           {/* Custom Img Wrapper */}
           <div
             id="img-wrapper"

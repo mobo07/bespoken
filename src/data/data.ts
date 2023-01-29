@@ -132,3 +132,31 @@ export const tshirts: TshirtCategory[] = [
         path: "assets/images/plain tees/shirt9.png",
     },
 ];
+
+export const steps = [
+    {
+      element: "#outfit-type",
+      intro: `<p style="font-family: 'Montserrat', sans-serif">Pick an outfit type</p>`,
+    },
+    {
+      element: "#outfit-color",
+      intro: `<p style="font-family: 'Montserrat', sans-serif">Select desired outfit color</p>`,
+    },
+    {
+      element: "#outfit-size",
+      intro: `<p style="font-family: 'Montserrat', sans-serif">Choose the outfit size</p>`,
+    },
+    {
+      element: "#design-wrapper",
+      intro: `<p style="font-family: 'Montserrat', sans-serif">Upload a custom image design from your device or choose a design from the featured designs section on the home page and drag the image to outfit</p>`,
+    },
+    {
+      element: "#outfit-wrapper",
+      intro: `<p style="font-family: 'Montserrat', sans-serif">Place the design in the desired position on the outfit</p>`,
+    },
+    {
+      element: "#atc",
+      intro: `<p style="font-family: 'Montserrat', sans-serif">Add to cart!</p>`,
+      position: "left",
+    },
+  ];

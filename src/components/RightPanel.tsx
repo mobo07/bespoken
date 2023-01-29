@@ -140,7 +140,7 @@ const RightPanel = ({
       {/* Outfit Type */}
       <div className="">
         <h3 className="font-semibold text-lg text-[#300710]">Outfit Type:</h3>
-        <div className="relative my-3 py-[0.2rem]">
+        <div id="outfit-type" className="relative my-3 py-[0.2rem]">
           <div
             className={`${activeOutfit?.type} absolute bottom-0 h-full rounded-md bg-[#300710] transition-all duration-300`}
           ></div>
@@ -176,7 +176,7 @@ const RightPanel = ({
       {/* Colors */}
       <div className="">
         <h3 className="font-semibold text-lg text-[#300710]">Color:</h3>
-        <div className="my-4 flex items-center flex-wrap">
+        <div id="outfit-color" className="my-4 flex items-center flex-wrap">
           {outfits?.map((item) => (
             <div
               key={item._id}
@@ -190,7 +190,7 @@ const RightPanel = ({
       {/* Sizes */}
       <div className="">
         <h3 className="font-semibold text-lg text-[#300710]">Size:</h3>
-        <div className="relative my-3 py-[0.2rem]">
+        <div id="outfit-size" className="relative my-3 py-[0.2rem]">
           <div
             className="absolute bottom-0 h-[0.2rem] w-12 rounded-md bg-[#300710] transition-all duration-300"
             style={{ left: `${3 * sizeIdx}rem` }}
@@ -227,6 +227,7 @@ const RightPanel = ({
                 ? "not-allowed"
                 : "pointer",
           }}
+          id="atc"
           className="px-2 w-[7.43rem] h-8 mx-4 flex items-center justify-center rounded-md border border-[#300710] text-sm"
         >
           {customOutfitLoading || customImgLoading || convertingToPng ? (

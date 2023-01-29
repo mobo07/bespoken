@@ -95,3 +95,17 @@ export type TDesign = {
   img: string,
   price: number
 };
+
+interface Steps {
+  element?: string,
+  intro: string,
+  position?: string,
+  tooltipClass?: string,
+  highlightClass?: string,
+};
+
+interface Hints {
+  element: string,
+  hint: string,
+  hintPosition: string,
+};

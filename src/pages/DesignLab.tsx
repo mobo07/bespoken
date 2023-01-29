@@ -8,10 +8,12 @@ import { Product } from "../data/types";
 import { fetchCustomProducts } from "../api";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
+import { Steps } from "intro.js-react";
+import "intro.js/introjs.css";
+import { steps } from "../data/data";
 
 const DesignLab = () => {
   const location = useLocation();
-  // console.log(location);
   const {
     data: outfits,
     isLoading,
@@ -28,23 +30,28 @@ const DesignLab = () => {
   const [img, setImg] = useState<File | string>();
   const ref = useRef<HTMLDivElement>(null);
 
+  // state for introjs
+  const [stepsEnabled, setStepsEnabled] = useState<boolean>(false);
+
   useEffect(() => {
-    if (outfits)
+    let introTimer: ReturnType<typeof setTimeout>;
+    if (outfits) {
       setActiveOutfit(
         outfits.filter((outfit) => outfit.type === outfitCategory)[0]
       );
+      introTimer = setTimeout(() => {
+        setStepsEnabled(true);
+      }, 0);
+    }
     if (!img && location.state) setImg(location.state.img);
+
+    return () => clearTimeout(introTimer);
   }, [outfits, outfitCategory]);
 
   const convertDivToPng = useCallback(() => {
     const getImgUrl = async () => {
       try {
         if (ref.current === null) return;
-        // const dataUrl = await toPng(ref.current);
-        // const link = document.createElement("a");
-        // link.download = "my-image-name.png";
-        // link.href = dataUrl;
-        // link.click();
         console.log("waiting for url...");
         const url = await toPng(ref.current);
         console.log("url generated successfully");
@@ -56,6 +63,10 @@ const DesignLab = () => {
 
     return getImgUrl();
   }, [ref]);
+
+  const onExit = () => {
+    setStepsEnabled(false);
+  };
 
   if (isLoading) {
     return (
@@ -84,8 +95,13 @@ const DesignLab = () => {
   return (
     <div className="">
       <Navbar />
-
       <div className="flex flex-col mt-[4.3rem] px-3 h-[150vh] md:h-[calc(100vh_-_70px)] md:flex-row">
+        <Steps
+          enabled={stepsEnabled}
+          steps={steps}
+          initialStep={0}
+          onExit={onExit}
+        />
         <LeftPanel
           ref={ref}
           outfits={outfits.filter((outfit) => outfit.type === outfitCategory)}
