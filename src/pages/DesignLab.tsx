@@ -36,16 +36,19 @@ const DesignLab = () => {
   useEffect(() => {
     let introTimer: ReturnType<typeof setTimeout>;
     if (outfits) {
-      setActiveOutfit(
-        outfits.filter((outfit) => outfit.type === outfitCategory)[0]
-      );
       introTimer = setTimeout(() => {
         setStepsEnabled(true);
       }, 0);
     }
-    if (!img && location.state) setImg(location.state.img);
-
     return () => clearTimeout(introTimer);
+  }, [outfits]);
+
+  useEffect(() => {
+    if (outfits)
+      setActiveOutfit(
+        outfits.filter((outfit) => outfit.type === outfitCategory)[0]
+      );
+    if (!img && location.state) setImg(location.state.img);
   }, [outfits, outfitCategory]);
 
   const convertDivToPng = useCallback(() => {
